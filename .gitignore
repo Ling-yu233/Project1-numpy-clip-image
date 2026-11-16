@@ -1,0 +1,26 @@
+# ---- Python 运行产生的缓存 ----
+__pycache__/
+*.py[cod]
+
+# ---- 虚拟环境 ----
+.venv/
+venv/
+env/
+
+# ---- IDE / 系统文件 ----
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# ---- 大文件：权重 312MB，超过 GitHub 单文件 100MB 上限 ----
+weights/image_encoder.npz
+
+# ---- 版权属于他人的课程素材，不公开上传 ----
+assets/images/
+lecture-demos/images/
+practice/
+
+# ---- 运行时生成的输出（如有） ----
+outputs/
+*.log
