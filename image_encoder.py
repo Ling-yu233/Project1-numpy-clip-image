@@ -123,9 +123,7 @@ class ImageEncoder:
         """TODO-06. Return one normalized output token [B,512] per image."""
         tokens = self.encode_tokens(images)
 
-        # Select CLS, apply post_norm, and project with self.projection.
-        # [B,50,768] -> [B,768] -> [B,512]. visual.proj is already [in,out].
-        # Name the projected array output. The final unit-vector helper is given.
-        raise NotImplementedError('TODO-06: CLS selection, post-Norm and projection')
+        cls_token = tokens[:, 0, :]  # [B,768]，第 0 行是 CLS
+        output = self.post_norm(cls_token) @ self.projection  # [B,512]，proj 不转置
 
         return unit_vector(output)
