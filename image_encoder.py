@@ -92,14 +92,16 @@ class ImageEncoder:
 
     def patchify(self, images):
         """TODO-01. [B,3,224,224] -> [B,49,3072].
-
-        Visit patches left to right, then top to bottom. Within a patch, flatten
-        C,H,W in that order. Each 32x32 RGB patch contributes 3*32*32 values.
-        Use reshape/transpose. Do not resize the already-prepared input.
         """
-        # TODO-01: separate patch-grid axes; reorder; flatten.
-        # Input [B,3,224,224], return [B,49,3072].
-        raise NotImplementedError('TODO-01: turn each image into 49 patch rows')
+        if images.ndim != 4 or images.shape[1:] != (3, 224, 224):
+            raise ValueError('patchify expects [B,3,224,224], got ' + str(images.shape))
+        batch, channels, height, width = images.shape
+        size = 32
+        rows, cols = height // size, width // size
+        x = images.reshape(batch, channels, rows, size, cols, size)
+        x = x.transpose(0, 2, 4, 1, 3, 5)
+        return x.reshape(batch, rows * cols, channels * size * size)
+
 
     def embed(self, images):
         patches = self.patchify(images)  # [B,49,3072]
