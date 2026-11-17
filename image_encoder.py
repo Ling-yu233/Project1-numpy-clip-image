@@ -32,8 +32,7 @@ class MultiHeadAttention:
         v = self.split_heads(qkv[:, :, 2*self.width:])
 
         # TODO-03a: query/key comparisons, scaled by sqrt(head_dim).
-        # q,k,v: [B,H,N,64]. scores must have [B,H,N,N].
-        raise NotImplementedError('TODO-03a: calculate scores from q and k')
+        scores = (q @ k.transpose(0, 1, 3, 2)) / np.sqrt(np.float32(self.head_dim))
 
         # Given for later text-encoder compatibility. Images use causal=False.
         if causal:
@@ -41,12 +40,12 @@ class MultiHeadAttention:
         coefficients = attention_weights(scores)  # supplied numerical helper
 
         # TODO-03b: mix value rows using coefficients; then join head outputs.
-        # context: [B,H,N,64], merged: [B,N,D].
-        raise NotImplementedError('TODO-03b: weighted values and merged heads')
+        context = coefficients @ v  # [B,H,N,64]
+        batch, _, tokens, _ = context.shape
+        merged = context.transpose(0, 2, 1, 3).reshape(batch, tokens, self.width)
 
         # TODO-03c: output projection, using out_weight and out_bias.
-        # Return [B,N,D]. Remember the stored linear-weight orientation.
-        raise NotImplementedError('TODO-03c: project merged attention outputs')
+        return merged @ self.out_weight.T + self.out_bias
 
 
 class TransformerBlock:
