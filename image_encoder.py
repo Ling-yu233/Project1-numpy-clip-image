@@ -19,13 +19,10 @@ class MultiHeadAttention:
 
     def split_heads(self, x):
         """TODO-02. Input [B,N,D], return [B,H,N,D/H].
-
-        In this image model D=768, H=12 and D/H=64. Use reshape/transpose.
-        Research the head organization independently. Preserve token order.
         """
-        # TODO-02 contract: [B,N,D] to [B,H,N,D/H].
-        # Image model: D=768, H=12, D/H=64.
-        raise NotImplementedError('TODO-02: split the feature axis into heads')
+        batch, tokens, width = x.shape
+        x = x.reshape(batch, tokens, self.heads, self.head_dim)
+        return x.transpose(0, 2, 1, 3)
 
     def __call__(self, x, causal=False):
         # Given: stored linear weights use [out,in]. Parameters stay fixed.
