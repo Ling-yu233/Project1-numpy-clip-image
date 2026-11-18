@@ -16,9 +16,7 @@ Thumbs.db
 # ---- 大文件：权重 312MB，超过 GitHub 单文件 100MB 上限 ----
 weights/image_encoder.npz
 
-# ---- 版权属于他人的课程素材，不公开上传 ----
-assets/images/
-lecture-demos/images/
+# ---- 课程练习材料，与代码运行无关 ----
 practice/
 
 # ---- 课程原始作业说明，仅本地保留 ----

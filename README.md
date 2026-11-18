@@ -66,20 +66,18 @@ project1-numpy-student/
 │   ├── images.json         # 10 张测试图片的 ID 与来源
 │   ├── manifest.json
 │   ├── reference_outputs.npz  # 参考输出，仅供 check.py 比对
-│   └── images/             # （未上传，见第 5 节）
+│   └── images/             # 10 张测试图片 image_01.jpg ~ image_10.jpg
 └── lecture-demos/          # 课堂 NumPy 示例脚本
 ```
 
 ## 5. 数据与权重获取
 
-以下文件**没有上传到仓库**，需要从课程平台下载的附件中取得，放回对应位置：
+测试图片已包含在仓库中。以下文件**没有上传**，需要从课程平台下载的附件中取得，放回对应位置：
 
 | 文件 | 原因 | 放置位置 |
 |---|---|---|
 | `image_encoder.npz`（312 MB） | 超过 GitHub 单文件 100 MB 上限 | `weights/` |
-| 10 张测试图片 `image_01.jpg` ~ `image_10.jpg` | 版权属于原网站 | `assets/images/` |
-| `uw_cat.png` | 版权属于原课程 | `lecture-demos/images/` |
-| `project1_exercises.pdf` | 课程练习材料 | `practice/` |
+| `project1_exercises.pdf` | 课程练习材料，与代码运行无关 | `practice/` |
 
 放好后运行 `python check.py --stage assets`。程序会用 `weights/manifest.json` 中的 SHA-256 校验文件是否正确。
 
