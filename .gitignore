@@ -21,6 +21,10 @@ assets/images/
 lecture-demos/images/
 practice/
 
+# ---- 课程原始作业说明，仅本地保留 ----
+ASSIGNMENT.md
+
 # ---- 运行时生成的输出（如有） ----
 outputs/
 *.log
+*_tokens.npz
